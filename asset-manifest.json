@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/expance-traker-frontend/static/css/main.25f179fc.css",
-    "main.js": "/expance-traker-frontend/static/js/main.d18f1890.js",
-    "static/js/787.fe55d599.chunk.js": "/expance-traker-frontend/static/js/787.fe55d599.chunk.js",
-    "static/media/Azonix.woff": "/expance-traker-frontend/static/media/Azonix.18058c96d53ad2f9f2a3.woff",
-    "index.html": "/expance-traker-frontend/index.html",
-    "main.25f179fc.css.map": "/expance-traker-frontend/static/css/main.25f179fc.css.map",
-    "main.d18f1890.js.map": "/expance-traker-frontend/static/js/main.d18f1890.js.map",
-    "787.fe55d599.chunk.js.map": "/expance-traker-frontend/static/js/787.fe55d599.chunk.js.map"
+    "main.css": "/expance-tracker-frontend/static/css/main.42968252.css",
+    "main.js": "/expance-tracker-frontend/static/js/main.2c124c62.js",
+    "static/js/787.fe55d599.chunk.js": "/expance-tracker-frontend/static/js/787.fe55d599.chunk.js",
+    "static/media/Azonix.woff": "/expance-tracker-frontend/static/media/Azonix.18058c96d53ad2f9f2a3.woff",
+    "index.html": "/expance-tracker-frontend/index.html",
+    "main.42968252.css.map": "/expance-tracker-frontend/static/css/main.42968252.css.map",
+    "main.2c124c62.js.map": "/expance-tracker-frontend/static/js/main.2c124c62.js.map",
+    "787.fe55d599.chunk.js.map": "/expance-tracker-frontend/static/js/787.fe55d599.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.25f179fc.css",
-    "static/js/main.d18f1890.js"
+    "static/css/main.42968252.css",
+    "static/js/main.2c124c62.js"
   ]
 }
