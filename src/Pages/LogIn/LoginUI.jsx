@@ -88,7 +88,7 @@ const LoginUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                             />
                         </Box>
                     </Box>
-                    <Login onClick={onSubmit}>
+                    <Login loading={loading} onClick={onSubmit}>
                         <LogIn />
                         <Typography sx={{ ...center }} color="primary.main">Log In</Typography>
                     </Login>

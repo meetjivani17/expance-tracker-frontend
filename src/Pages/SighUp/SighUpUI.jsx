@@ -7,7 +7,7 @@ import { CreateUserPerson } from "../../components/layouts/common/Logo";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const SighUpUI = ({ loading, formValues, setFormValues }) => {
+const SighUpUI = ({ loading, formValues, setFormValues,onSubmit }) => {
     const navigate = useNavigate();
     const SighUp = styled(ButtonBase)(({ theme }) => ({
         width: "285px",
@@ -90,7 +90,7 @@ const SighUpUI = ({ loading, formValues, setFormValues }) => {
                                     }
                                 }}
                                 disabled={loading}
-                                type="text"
+                                type="Password"
                                 label="Password*"
                                 value={formValues.password}
                                 onChange={(e) =>
@@ -103,7 +103,7 @@ const SighUpUI = ({ loading, formValues, setFormValues }) => {
                             />
                         </Box>
                     </Box>
-                    <SighUp>
+                    <SighUp loading={loading} onClick={onSubmit}>
                         <CreateUserPerson />
                         <Typography sx={{ ...center }} color="primary.main" >Create Account</Typography>
                     </SighUp>

@@ -7,7 +7,6 @@ export const addCategoryApi = async (data) => {
     url: endpoints.category,
     method: "POST",
     headers: getHeaders(),
-
     data,
   })
     .then((response) => response.data)
@@ -24,8 +23,7 @@ export const getCategoryApi = async () => {
   const callResponse = await axios({
     url: endpoints.category,
     method: "get",
-    headers: getHeaders(),
-    params,
+    headers: getHeaders()
   })
     .then((response) => response.data)
     .catch((err) => ({

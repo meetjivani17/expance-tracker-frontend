@@ -16,6 +16,7 @@ import Navbar from "./Navbar"
 import responsive from "../../../assets/css/responsive"
 import MobileNav from "./MobileNav"
 import colorTheme from "../../../assets/css/theme/colorTheme"
+import { signOutAction } from "../../../store/actions/userReducerAction"
 
 
 
@@ -28,7 +29,7 @@ const containerStyle = (theme) => ({
 })
 const mobileContainerStyle = (theme) => ({ height: "100%", width: "100%", display: "flex", background: "#FFFFFF", ...responsive.mobileContainerStyle })
 const navBarOuterStyle = (theme) => ({ height: "90vh", width: "224px", position: "relative" })
-const navbarInnerStyle = (theme) => ({ width: "224px", background: "#1B191B", height: "100%", overflowY: "auto", position: "relative", borderRadius: "25px",position:"relative" })
+const navbarInnerStyle = (theme) => ({ width: "224px", background: "#1B191B", height: "100%", overflowY: "auto", position: "relative", borderRadius: "25px", position: "relative" })
 const boxStyle = (theme) => ({
   width: "100%",
   height: "90vh",
@@ -95,8 +96,8 @@ const AppContainer = () => {
     marginBottom: theme.spacing(2),
     backgroundColor: "#fff",
     color: "primary.main",
-    position:"absolute",
-    bottom:"52px"
+    position: "absolute",
+    bottom: "52px"
   }))
 
 
@@ -119,8 +120,10 @@ const AppContainer = () => {
                 <Navbar />
               </Box>
             </Box>
-            <Box sx={{...center}}>
-              <Logout>
+            <Box sx={{ ...center }}>
+              <Logout onClick={() => {
+                dispatch(signOutAction());
+              }}>
                 <LogOut />
                 <Typography sx={{ ...center }} color="primary.main" >Log out</Typography>
               </Logout>
@@ -130,7 +133,7 @@ const AppContainer = () => {
 
 
         <Box sx={boxStyle}>
-          <Box p={"20px 54px 20px 54px"} sx={{ display: "flex", flex: 1, flexDirection: "column",color:"light.main" }}>
+          <Box p={"20px 54px 20px 54px"} sx={{ display: "flex", flex: 1, flexDirection: "column", color: "light.main" }}>
             <Outlet />
           </Box>
         </Box>
