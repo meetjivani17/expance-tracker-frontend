@@ -1,5 +1,4 @@
-// const mode = process.env.REACT_APP_APP_MODE;
-const mode = "local"
+const mode = process.env.REACT_APP_APP_MODE;
 let domain = "";
 
 switch (mode) {
@@ -7,10 +6,10 @@ switch (mode) {
     domain = "http://192.168.0.110:8000/";
     break;
   case "production":
-    domain = "https://expense-tracker-backend-production-5ce8.up.railway.app/expense-tracker/";
+    domain = process.env.REACT_APP_PRODUCTION_URL;
     break;
   case "local":
-    domain = "https://expense-tracker-backend-production-5ce8.up.railway.app/expense-tracker/";
+    domain = "http://localhost:8000/expanse-tracker";
     break;
   case "development":
     domain = process.env.REACT_APP_DEVELOPMENT_URL;
@@ -26,5 +25,5 @@ export default {
   userBase: `${domain}api/user/`,
   userPassword: `${domain}api/user/password`,
   category: `${domain}api/category`,
-  transaction: `${domain}api/trasaction`,
+  transaction: `${domain}api/transaction`,
 };

@@ -56,29 +56,8 @@ let activePath = "";
 
 const AppContainer = () => {
   const dispatch = useDispatch()
-  const [navBar, setNavbar] = useState(true)
-
-  const location = useLocation()
-  let splittedPath = location.pathname.split('/')
-  activePath = splittedPath[1] + " / ";
-  if (splittedPath[2] == "") {
-    activePath += " " + splittedPath[1];
-  }
-  else if (splittedPath[2] != "employee") {
-    activePath += " " + splittedPath[1] + " / " + splittedPath[2]
-  }
-  else {
-    activePath += splittedPath[2] + " " + splittedPath[1];
-  }
-  const ActivePath = {
-    textTransform: "capitalize",
-    margin: "24px 0 0 24px",
-    color: colorTheme.palette.text[300],
-    cursor: "pointer"
-  }
   const navigate = useNavigate();
   const user = useSelector(state => state.user)
-
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const Logout = styled(ButtonBase)(({ theme, Active }) => ({
@@ -114,7 +93,7 @@ const AppContainer = () => {
             <Box sx={sidePanel}>
               <Box>
                 <ExpensierLogo sx={expensierLogo} />
-                <Typography sx={{ ...center }} color="light.main" >Hi,User</Typography>
+                <Typography sx={{ ...center }} color="light.main" >Hi,{user.data.name}</Typography>
               </Box>
               <Box mt={"52px"}>
                 <Navbar />

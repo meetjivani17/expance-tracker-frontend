@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Collapse, IconButton, useTheme, Paper, useMediaQuery, Typography, Button, ButtonBase, styled, Grid, Avatar, InputBase, NativeSelect, MenuItem, TablePagination } from "@mui/material"
+import { Box, Collapse, IconButton, useTheme, Paper, useMediaQuery, Typography, Button, ButtonBase, styled, Grid, Avatar, InputBase, NativeSelect, MenuItem, TablePagination, Skeleton } from "@mui/material"
 import { Calender, MenuIcon, Delete, Update } from "./../../components/layouts/common/Logo"
 import SearchIcon from '@mui/icons-material/Search';
 import { alpha } from '@mui/material/styles';
@@ -8,9 +8,12 @@ import CustomDatePicker from "../../components/layouts/common/CustomDatePicker";
 import { openModal, closeModal } from "../../store/actions/modalAction";
 import { center } from "../../assets/css/theme/common";
 
-const TransactionUI = ({ date, setDate, expanseData, filters, setFilters, addNewExpanceModal, updateExpance, AddCategory }) => {
+const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilters, addNewExpanceModal, updateExpance, AddCategory, categorydata, updateCategory, deleteCategory }) => {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [currentExpenseItem, setCurrentExpenseItem] = useState(null);
+    const [isCategoryMenuVisible, setCategoryIsMenuVisible] = useState(false);
+    const [currentCategoryItem, setCurrentCategoryItem] = useState(null);
+    const [deleteC, setDeleteC] = useState(false)
     const transactionExpanseOuter = (theme) => ({
 
     })
@@ -253,23 +256,50 @@ const TransactionUI = ({ date, setDate, expanseData, filters, setFilters, addNew
                         </Box>
                         <Box>
                             <Box mt={"15px"} sx={categoryOuter}>
-                                {
-                                    [1, 2, 3, 4, 5, 6, 7, 8, 9].map((row, index) => (
-                                        <Box sx={expanseInner}>
+                                {loading && <>
+                                    <Box>
+                                        <Skeleton variant="rectangular" height={"60px"} width={"100%"} />
+                                        <Skeleton sx={{ marginTop: "8px" }} variant="rectangular" height={"60px"} width={"100%"} />
+                                        <Skeleton sx={{ marginTop: "8px" }} variant="rectangular" height={"60px"} width={"100%"} />
+                                    </Box>
+                                </>}
+                                {!loading && categorydata && categorydata.result &&
+                                    categorydata.result.length == 0 &&
+                                    <Typography variant="h4" color={"white"}>No Category Available</Typography>
+                                }
+                                {!loading && categorydata && categorydata.result && categorydata.result.length > 0 &&
+                                    categorydata.result.map((row, index) => (
+                                        <Box sx={expanseInner} key={index}
+                                            onMouseEnter={() => {
+                                                setCategoryIsMenuVisible(true);
+                                                setCurrentCategoryItem(index);
+                                            }}
+                                            onMouseLeave={() => setCategoryIsMenuVisible(false)}
+                                        >
                                             <Box>
-                                                <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                    <FolderIcon />
+                                                <Avatar sx={{ bgcolor: "light.main", width: "50px", height: "50px" }}>
+                                                    {row.icon}
                                                 </Avatar>
                                             </Box>
                                             <Box sx={{
                                                 display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
                                             }}>
                                                 <Box>
-                                                    <Typography variant="h4" color={"white"}>Food</Typography>
-                                                    <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
+                                                    <Typography variant="h4" color={"white"}>{row.name}</Typography>
                                                 </Box>
                                                 <Box>
-                                                    <MenuIcon />
+                                                    {isCategoryMenuVisible && currentCategoryItem == index && (
+                                                        <Box sx={{ ...center, gap: "3px" }}>
+                                                            <ButtonBase onClick={() => { updateCategory(row) }}>
+                                                                <Update />
+                                                            </ButtonBase>
+                                                            <ButtonBase onClick={() => {
+                                                                deleteCategory(row._id)
+                                                            }}>
+                                                                <Delete />
+                                                            </ButtonBase>
+                                                        </Box>
+                                                    )}
                                                 </Box>
                                             </Box>
                                         </Box>
