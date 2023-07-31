@@ -54,10 +54,12 @@ const LoginUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                         <Typography variant="p" color="error">{formValues.err}</Typography>
                         <Box sx={{ width: "285px" }}>
                             <CustomInput
+                                inputProps={{ sx: { color: "white" } }}
                                 disabled={loading}
                                 type="text"
                                 label="Email*"
                                 value={formValues.email}
+                                color="light"
                                 onChange={(e) =>
                                     setFormValues({
                                         ...formValues,
@@ -65,15 +67,11 @@ const LoginUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                                         email: e.target.value,
                                     })
                                 }
+                                focused
                             />
                             <CustomInput
-                                InputProps={{
-                                    style: {
-                                        label: {
-                                            color: `#fff !important`,
-                                        }
-                                    }
-                                }}
+                                inputProps={{ sx: { color: "white" } }}
+                                color="light"
                                 disabled={loading}
                                 type="Password"
                                 label="Password*"
@@ -85,6 +83,7 @@ const LoginUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                                         password: e.target.value,
                                     })
                                 }
+                                focused
                             />
                         </Box>
                     </Box>
