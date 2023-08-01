@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/expance_traker_frontend/static/css/main.028490bb.css",
+    "main.js": "/expance_traker_frontend/static/js/main.66189951.js",
+    "static/js/787.fe55d599.chunk.js": "/expance_traker_frontend/static/js/787.fe55d599.chunk.js",
+    "static/media/Azonix.woff": "/expance_traker_frontend/static/media/Azonix.18058c96d53ad2f9f2a3.woff",
+    "index.html": "/expance_traker_frontend/index.html",
+    "main.028490bb.css.map": "/expance_traker_frontend/static/css/main.028490bb.css.map",
+    "main.66189951.js.map": "/expance_traker_frontend/static/js/main.66189951.js.map",
+    "787.fe55d599.chunk.js.map": "/expance_traker_frontend/static/js/787.fe55d599.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.028490bb.css",
+    "static/js/main.66189951.js"
+  ]
+}
