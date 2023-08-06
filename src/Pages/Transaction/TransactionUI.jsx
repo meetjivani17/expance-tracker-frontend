@@ -7,6 +7,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import CustomDatePicker from "../../components/layouts/common/CustomDatePicker";
 import { openModal, closeModal } from "../../store/actions/modalAction";
 import { center } from "../../assets/css/theme/common";
+import { SubscriptionsPlaceholder, DashboardPlaceholder } from "./../../components/layouts/common/Logo";
 
 const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilters, addNewExpanceModal, updateExpance, AddCategory, categorydata, updateCategory, deleteCategory }) => {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -153,6 +154,21 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
                             </Box>
                             <Box>
                                 <Box mt={"15px"} sx={expanseOuter}>
+                                    {
+                                        expanseData && expanseData.length == 0 && <>
+                                            <Box sx={{ ...center, flexDirection: "column", gap: "30px", marginTop: "20px" }}>
+                                                <DashboardPlaceholder />
+                                                <Box sx={{ width: "270px", ...center, flexDirection: "column", gap: "20px" }}>
+                                                    <Typography variant="h4">
+                                                        It looks a bit empty here!
+                                                    </Typography>
+                                                    <Typography variant="p">
+                                                        Your expenses will appear on this page. Add your first expense by clicking the “Add new” button above.
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+                                        </>
+                                    }
                                     {expanseData && expanseData.length > 0 &&
                                         expanseData.map((row, index) => (
                                             <Box sx={expanseInner}
@@ -265,7 +281,17 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
                                 </>}
                                 {!loading && categorydata && categorydata.result &&
                                     categorydata.result.length == 0 &&
-                                    <Typography variant="h4" color={"white"}>No Category Available</Typography>
+                                    <Box sx={{ ...center, flexDirection: "column", gap: "30px", marginTop: "20px" }}>
+                                        <SubscriptionsPlaceholder />
+                                        <Box sx={{ width: "270px", ...center, flexDirection: "column", gap: "20px" }}>
+                                            <Typography variant="h4">
+                                                It looks a bit empty here!
+                                            </Typography>
+                                            <Typography variant="p">
+                                                Your Category will appear on this page. Add your first Category by clicking the “Add new” button above.
+                                            </Typography>
+                                        </Box>
+                                    </Box>
                                 }
                                 {!loading && categorydata && categorydata.result && categorydata.result.length > 0 &&
                                     categorydata.result.map((row, index) => (

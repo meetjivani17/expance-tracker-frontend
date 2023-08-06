@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { PieChart, Pie, Cell, Legend } from "recharts";
 import { useNavigate } from "react-router-dom";
+import { DashboardPlaceholder, CryptoPlaceholder, GraphPlaceholder } from "./../../components/layouts/common/Logo";
 
 const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
     const navigate = useNavigate();
@@ -123,80 +124,91 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
                                         navigate("/transactions")
                                     }} />
                                 </Box>
-                                <Box mt={"15px"} sx={expanseOuter}>
-                                    <Box sx={expanseInner}>
-                                        <Box>
-                                            <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                <FolderIcon />
-                                            </Avatar>
+                                {
+                                    GraphData.length == 0 && <>
+                                        <Box sx={{ ...center, height: "30vh", marginTop: "15px" }}>
+                                            <DashboardPlaceholder />
                                         </Box>
-                                        <Box sx={{
-                                            display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
-                                        }}>
-                                            <Box>
-                                                <Typography variant="h4" color={"white"}>Food</Typography>
-                                                <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
+                                    </>
+                                }
+                                {
+                                    GraphData.length > 0 && <>
+                                        <Box mt={"15px"} sx={expanseOuter}>
+                                            <Box sx={expanseInner}>
+                                                <Box>
+                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
+                                                        <FolderIcon />
+                                                    </Avatar>
+                                                </Box>
+                                                <Box sx={{
+                                                    display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
+                                                }}>
+                                                    <Box>
+                                                        <Typography variant="h4" color={"white"}>Food</Typography>
+                                                        <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
+                                                    </Box>
+                                                    <Box>
+                                                        <Typography variant="h3">₹200.00</Typography>
+                                                    </Box>
+                                                </Box>
                                             </Box>
-                                            <Box>
-                                                <Typography variant="h3">₹200.00</Typography>
+                                            <Box sx={expanseInner}>
+                                                <Box>
+                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
+                                                        <FolderIcon />
+                                                    </Avatar>
+                                                </Box>
+                                                <Box sx={{
+                                                    display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
+                                                }}>
+                                                    <Box>
+                                                        <Typography variant="h4" color={"white"}>Food</Typography>
+                                                        <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
+                                                    </Box>
+                                                    <Box>
+                                                        <Typography variant="h3">₹200.00</Typography>
+                                                    </Box>
+                                                </Box>
+                                            </Box>
+                                            <Box sx={expanseInner}>
+                                                <Box>
+                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
+                                                        <FolderIcon />
+                                                    </Avatar>
+                                                </Box>
+                                                <Box sx={{
+                                                    display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
+                                                }}>
+                                                    <Box>
+                                                        <Typography variant="h4" color={"white"}>Food</Typography>
+                                                        <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
+                                                    </Box>
+                                                    <Box>
+                                                        <Typography variant="h3">₹200.00</Typography>
+                                                    </Box>
+                                                </Box>
+                                            </Box>
+                                            <Box sx={expanseInner}>
+                                                <Box>
+                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
+                                                        <FolderIcon />
+                                                    </Avatar>
+                                                </Box>
+                                                <Box sx={{
+                                                    display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
+                                                }}>
+                                                    <Box>
+                                                        <Typography variant="h4" color={"white"}>Food</Typography>
+                                                        <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
+                                                    </Box>
+                                                    <Box>
+                                                        <Typography variant="h3">₹200.00</Typography>
+                                                    </Box>
+                                                </Box>
                                             </Box>
                                         </Box>
-                                    </Box>
-                                    <Box sx={expanseInner}>
-                                        <Box>
-                                            <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                <FolderIcon />
-                                            </Avatar>
-                                        </Box>
-                                        <Box sx={{
-                                            display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
-                                        }}>
-                                            <Box>
-                                                <Typography variant="h4" color={"white"}>Food</Typography>
-                                                <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
-                                            </Box>
-                                            <Box>
-                                                <Typography variant="h3">₹200.00</Typography>
-                                            </Box>
-                                        </Box>
-                                    </Box>
-                                    <Box sx={expanseInner}>
-                                        <Box>
-                                            <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                <FolderIcon />
-                                            </Avatar>
-                                        </Box>
-                                        <Box sx={{
-                                            display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
-                                        }}>
-                                            <Box>
-                                                <Typography variant="h4" color={"white"}>Food</Typography>
-                                                <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
-                                            </Box>
-                                            <Box>
-                                                <Typography variant="h3">₹200.00</Typography>
-                                            </Box>
-                                        </Box>
-                                    </Box>
-                                    <Box sx={expanseInner}>
-                                        <Box>
-                                            <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                <FolderIcon />
-                                            </Avatar>
-                                        </Box>
-                                        <Box sx={{
-                                            display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
-                                        }}>
-                                            <Box>
-                                                <Typography variant="h4" color={"white"}>Food</Typography>
-                                                <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
-                                            </Box>
-                                            <Box>
-                                                <Typography variant="h3">₹200.00</Typography>
-                                            </Box>
-                                        </Box>
-                                    </Box>
-                                </Box>
+                                    </>
+                                }
                             </Box>
                         </Grid>
                         <Grid item xs={6}>
@@ -226,33 +238,44 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
                                 </Select>
                             </Box>
                             <Box mt={"15px"}>
-                                <Box sx={expanseOuter}>
-                                    <PieChart width={400} height={200}>
-                                        <Pie
-                                            data={PieChartData}
-                                            cx={125}
-                                            cy={100}
-                                            innerRadius={50}
-                                            outerRadius={90}
-                                            fill="#8884d8"
-                                            paddingAngle={1}
-                                            dataKey="value"
-                                            cornerRadius={5}
-                                            style={{ strokeWidth: "0" }}
-                                        >
-                                            {PieChartData.map((entry, index) => (
-                                                <Cell key={index} fill={entry.fill} />
-                                            ))}
-                                        </Pie>
-                                        {/* <Legend verticalAlign="middle" align="right" layout="vertical" /> */}
-                                        <Legend
-                                            content={<CustomLegend />}
-                                            verticalAlign="middle"
-                                            align="right"
-                                            layout="horizontal"
-                                        />
-                                    </PieChart>
-                                </Box>
+                                {
+                                    PieChartData.length == 0 && <>
+                                        <Box sx={{ ...center, height: "30vh" }}>
+                                            <CryptoPlaceholder />
+                                        </Box>
+                                    </>
+                                }
+                                {
+                                    PieChartData.length > 0 && <>
+                                        <Box sx={expanseOuter}>
+                                            <PieChart width={400} height={200}>
+                                                <Pie
+                                                    data={PieChartData}
+                                                    cx={125}
+                                                    cy={100}
+                                                    innerRadius={50}
+                                                    outerRadius={90}
+                                                    fill="#8884d8"
+                                                    paddingAngle={1}
+                                                    dataKey="value"
+                                                    cornerRadius={5}
+                                                    style={{ strokeWidth: "0" }}
+                                                >
+                                                    {PieChartData.map((entry, index) => (
+                                                        <Cell key={index} fill={entry.fill} />
+                                                    ))}
+                                                </Pie>
+                                                {/* <Legend verticalAlign="middle" align="right" layout="vertical" /> */}
+                                                <Legend
+                                                    content={<CustomLegend />}
+                                                    verticalAlign="middle"
+                                                    align="right"
+                                                    layout="horizontal"
+                                                />
+                                            </PieChart>
+                                        </Box>
+                                    </>
+                                }
                             </Box>
                         </Grid>
                     </Grid>
@@ -284,21 +307,40 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
                                 <MenuItem value={30}>this year</MenuItem>
                             </Select>
                         </Box>
-                        <Box mt={"15px"} sx={{ width: "100%", height: "100%" }}>
-                            <ResponsiveContainer width="100%" height={250}>
-                                <AreaChart data={GraphData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                    <defs>
-                                        <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-                                            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-                                        </linearGradient>
-                                    </defs>
-                                    <XAxis dataKey="name" />
-                                    <YAxis />
-                                    <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
-                                </AreaChart>
-                            </ResponsiveContainer>
-                        </Box>
+                        {
+                            GraphData.length == 0 && <>
+                                <Box sx={{ ...center, height: "30vh", marginTop: "15px", gap: "50px" }}>
+                                    <GraphPlaceholder />
+                                    <Box sx={{ width: "320px" }}>
+                                        <Typography variant="h4">
+                                            It looks a bit empty here!
+                                        </Typography>
+                                        <Typography variant="p">
+                                            Your spending summary will appear on this section. Head over to the Transactions tab and click the “Add new” button to create a new transaction.
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </>
+                        }
+                        {
+                            GraphData.length > 0 && <>
+                                <Box mt={"15px"} sx={{ width: "100%", height: "100%" }}>
+                                    <ResponsiveContainer width="100%" height={250}>
+                                        <AreaChart data={GraphData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                            <defs>
+                                                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                                                    <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                                                </linearGradient>
+                                            </defs>
+                                            <XAxis dataKey="name" />
+                                            <YAxis />
+                                            <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+                                        </AreaChart>
+                                    </ResponsiveContainer>
+                                </Box>
+                            </>
+                        }
                     </Box>
                 </Box>
             </Box>
