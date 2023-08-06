@@ -74,7 +74,7 @@ const defineRoutes = (user) => {
       element: !user.isLoggedIn ? (
         <Navigate replace to={'/sign-in'} />
       ) : (
-        <Navigate replace to="/calendar" />
+        <Navigate replace to="/" />
       ),
       hideInPannel: true,
     }

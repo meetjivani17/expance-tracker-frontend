@@ -6,11 +6,13 @@ import { center } from "../../assets/css/theme/common";
 import Select from '@mui/material/Select';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { PieChart, Pie, Cell, Legend } from "recharts";
+import { useNavigate } from "react-router-dom";
 
 const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
+    const navigate = useNavigate();
     const CustomLegend = ({ payload }) => {
         return (
-            <ul style={{ listStyleType: 'none', padding: 0, position: "absolute", right: "0px",top:"-79px" ,zIndex:"2"}}>
+            <ul style={{ listStyleType: 'none', padding: 0, position: "absolute", right: "0px", top: "-79px", zIndex: "2" }}>
                 {payload.map((entry, index) => (
                     <li key={index} style={{ marginBottom: '10px' }}>
                         <span
@@ -117,7 +119,9 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
                                     <Typography variant="h3">
                                         Recent expenses
                                     </Typography>
-                                    <MenuIcon />
+                                    <MenuIcon onClick={() => {
+                                        navigate("/transactions")
+                                    }} />
                                 </Box>
                                 <Box mt={"15px"} sx={expanseOuter}>
                                     <Box sx={expanseInner}>

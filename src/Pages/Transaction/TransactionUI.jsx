@@ -217,7 +217,7 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
                                                 }}
                                                 sx={{
                                                     width: "100%",
-                                                    color: "white",
+                                                    color: "light.main",
                                                     backgroundColor: alpha("#fff", 0.15),
                                                     '&:hover': {
                                                         backgroundColor: alpha("#fff", 0.25),

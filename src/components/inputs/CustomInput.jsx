@@ -12,7 +12,7 @@ import { useState } from 'react'
 const formControlStyle = (theme,props) => {
   return {
     // marginTop: theme.spacing
-    color:props.color ? props.color : "rgba(0, 0, 0, 0.6)"
+    color: props && props.color ? props.color : "rgba(0, 0, 0, 0.6)"
   }
 }
 const CustomInput = (props) => {

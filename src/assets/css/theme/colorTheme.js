@@ -18,6 +18,9 @@ const colorTheme = {
             main: "#fff",
             200: "#E5E5E5"
         },
+        white:{
+            main: "#fff"
+        },
         grey: {
             main: "rgba(130, 132, 153, 1)",
             light: "rgba(191, 191, 191, 1)",
