@@ -56,6 +56,7 @@ const AddExpanceUI = ({ loading, formValues, setFormValues, addExpance }) => {
                                     err: "",
                                     category_name: changedVal.name,
                                     category_id: changedVal._id,
+                                    icon: changedVal.icon
                                 })
                             }}
                             titleKey={'name'}

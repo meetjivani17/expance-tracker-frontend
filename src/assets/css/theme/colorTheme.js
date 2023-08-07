@@ -18,6 +18,9 @@ const colorTheme = {
             main: "#fff",
             200: "#E5E5E5"
         },
+        white:{
+            main: "#fff"
+        },
         grey: {
             main: "rgba(130, 132, 153, 1)",
             light: "rgba(191, 191, 191, 1)",
@@ -30,7 +33,7 @@ const colorTheme = {
         },
         text: {
             primary: 'rgba(50, 71, 92, 1)',
-
+            white:'#fff',
             200: "rgba(130, 132, 153, 1)",
             300: "rgba(50, 71, 92, 0.68)",
             400: " rgba(50, 71, 92, 0.38)",

@@ -41,7 +41,7 @@ const AddCategoryUI = ({ loading, formValues, setFormValues, handleEmojiButtonCl
                 </Box>
 
                 <Box sx={{ display: "flex", justifyContent: "end", width: "70px", marginLeft: "auto", marginTop: "10px" }}>
-                    <SubmitButton title={'Add'} onClick={()=>{
+                    <SubmitButton loading={loading} title={'Add'} onClick={()=>{
                         addCategory(formValues);
                     }}></SubmitButton>
                 </Box>

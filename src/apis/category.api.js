@@ -3,6 +3,8 @@ import { getHeaders } from "../utils/helper";
 import endpoints from "./endpoints";
 
 export const addCategoryApi = async (data) => {
+  console.log(data);
+  console.log(endpoints.category);
   const callResponse = await axios({
     url: endpoints.category,
     method: "POST",

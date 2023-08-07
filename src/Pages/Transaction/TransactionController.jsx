@@ -13,7 +13,7 @@ import DeleteConfirmation from "../../components/layouts/common/DeleteConfirmati
 const TransactionController = () => {
     const [loading, setLoading] = useState(false);
     const [date, setDate] = useState(new Date());
-    const [expanseData, setExpanseData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 8, 9]);
+    const [expanseData, setExpanseData] = useState([]);
     const [categorydata, setCategoryData] = useState({});
     const [filters, setFilters] = useState({
         pageNo: 1,
