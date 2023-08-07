@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Collapse, IconButton, useTheme, Paper, useMediaQuery, Typography, Button, ButtonBase, styled, Grid, Avatar, InputBase, NativeSelect, MenuItem, TablePagination } from "@mui/material"
+import { Box, Collapse, IconButton, useTheme, Paper, useMediaQuery, Typography, Button, ButtonBase, styled, Grid, Avatar, InputBase, NativeSelect, MenuItem, TablePagination, CircularProgress } from "@mui/material"
 import { center } from "../../assets/css/theme/common";
 import { ExpensierLogo } from "../../components/layouts/common/Logo";
 import CustomInput from "../../components/inputs/CustomInput";
@@ -56,7 +56,7 @@ const SighUpUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                         <Typography variant="p" color="error">{formValues.err}</Typography>
                         <Box sx={{ width: "285px" }}>
                             <CustomInput
-                                inputProps={{ sx: { color: "white" } }}
+                                inputProps={{ sx: { color: "text.white" } }}
                                 disabled={loading}
                                 type="text"
                                 label="Name*"
@@ -72,7 +72,7 @@ const SighUpUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                                 focused
                             />
                             <CustomInput
-                                inputProps={{ sx: { color: "white" } }}
+                                inputProps={{ sx: { color: "text.white" } }}
                                 disabled={loading}
                                 type="text"
                                 label="Email*"
@@ -88,9 +88,9 @@ const SighUpUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                                 focused
                             />
                             <CustomInput
-                                inputProps={{ sx: { color: "white" } }}
+                                inputProps={{ sx: { color: "text.white" } }}
                                 disabled={loading}
-                                type="Password"
+                                type="password"
                                 label="Password*"
                                 color="light"
                                 value={formValues.password}
@@ -106,8 +106,17 @@ const SighUpUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                         </Box>
                     </Box>
                     <SighUp loading={loading} onClick={onSubmit}>
-                        <CreateUserPerson />
-                        <Typography sx={{ ...center }} color="primary.main" >Create Account</Typography>
+                        {
+                            loading && <>
+                                <CircularProgress />
+                            </>
+                        }
+                        {
+                            !loading && <>
+                                <CreateUserPerson />
+                                <Typography sx={{ ...center }} color="primary.main" >Create Account</Typography>
+                            </>
+                        }
                     </SighUp>
                 </Box>
             </Box>
