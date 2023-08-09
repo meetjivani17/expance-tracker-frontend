@@ -9,10 +9,14 @@ import { callApiAction } from "../../store/actions/commonAction";
 import { getCategoryApi, deleteCategoryApi } from "../../apis/category.api";
 import UpdateCategoryController from "./UpdateCategory/UpdateCategoryController";
 import DeleteConfirmation from "../../components/layouts/common/DeleteConfirmation";
+import { getTrasactionApi } from "../../apis/trasaction.api";
+import { LIST_VIEW_TIME, TRANSACTION_FETCH_TYPE } from "../../utils/constants";
 
 const TransactionController = () => {
     const [loading, setLoading] = useState(false);
+    const [expanseLoading, setExpanseLoading] = useState(false)
     const [date, setDate] = useState(new Date());
+    const [search, setSearch] = useState("");
     const [expanseData, setExpanseData] = useState([]);
     const [categorydata, setCategoryData] = useState({});
     const [filters, setFilters] = useState({
@@ -48,12 +52,44 @@ const TransactionController = () => {
             async () => await getCategoryApi(),
             (response) => {
                 setCategoryData(response)
-                console.log(response);
                 setLoading(false)
             },
             (err) => {
                 console.log(err)
                 setLoading(false)
+            }
+        ))
+    }
+
+    const fetchTransaction = () => {
+        setExpanseLoading(true)
+        console.log({ transactionFetchType: TRANSACTION_FETCH_TYPE.LIST_VIEW, listViewTime: LIST_VIEW_TIME.ALL, ...filters, ...search });
+        dispatch(callApiAction(
+            async () => await getTrasactionApi({ transactionFetchType: TRANSACTION_FETCH_TYPE.LIST_VIEW, listViewTime: LIST_VIEW_TIME.ALL, ...filters, search }),
+            (response) => {
+                setExpanseData(response)
+                console.log(response)
+                setExpanseLoading(false)
+            },
+            (err) => {
+                console.log(err)
+                setExpanseLoading(false)
+            }
+        ))
+    }
+
+    const fetchTransactionByDate = () => {
+        setExpanseLoading(true)
+        dispatch(callApiAction(
+            async () => await getTrasactionApi({ transactionFetchType: TRANSACTION_FETCH_TYPE.LIST_VIEW, listViewTime: LIST_VIEW_TIME.DATE, date: date, ...filters }),
+            (response) => {
+                setExpanseData(response)
+                console.log(response)
+                setExpanseLoading(false)
+            },
+            (err) => {
+                console.log(err)
+                setExpanseLoading(false)
             }
         ))
     }
@@ -101,10 +137,21 @@ const TransactionController = () => {
     useEffect(() => {
         fetchList();
     }, [])
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            fetchTransaction();
+        }, 500)
+
+        return () => clearTimeout(timer)
+
+    }, [search, filters])
+    useEffect(() => {
+        fetchTransactionByDate();
+    }, [date])
 
     return (
         <>
-            <TransactionUI loading={loading} date={date} setDate={setDate} expanseData={expanseData} filters={filters} setFilters={setFilters} addNewExpanceModal={addNewExpanceModal} updateExpance={updateExpance} AddCategory={AddCategory} categorydata={categorydata} updateCategory={updateCategory} deleteCategory={deleteCategory} />
+            <TransactionUI loading={loading} expanseLoading={expanseLoading} date={date} setDate={setDate} search={search} setSearch={setSearch} expanseData={expanseData} filters={filters} setFilters={setFilters} addNewExpanceModal={addNewExpanceModal} updateExpance={updateExpance} AddCategory={AddCategory} categorydata={categorydata} updateCategory={updateCategory} deleteCategory={deleteCategory} />
         </>
     )
 }

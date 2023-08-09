@@ -37,12 +37,13 @@ export const getCategoryApi = async () => {
   return callResponse;
 };
 
-export const updateCategoryFieldApi = async (data) => {
+export const updateCategoryFieldApi = async (data, params) => {
   const callResponse = await axios({
     url: endpoints.category,
     method: "PATCH",
     headers: getHeaders(),
     data,
+    params
   })
     .then((response) => response.data)
     .catch((err) => ({

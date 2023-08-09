@@ -9,7 +9,7 @@ import { openModal, closeModal } from "../../store/actions/modalAction";
 import { center } from "../../assets/css/theme/common";
 import { SubscriptionsPlaceholder, DashboardPlaceholder } from "./../../components/layouts/common/Logo";
 
-const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilters, addNewExpanceModal, updateExpance, AddCategory, categorydata, updateCategory, deleteCategory }) => {
+const TransactionUI = ({ loading, expanseLoading, date, setDate, search, setSearch, expanseData, filters, setFilters, addNewExpanceModal, updateExpance, AddCategory, categorydata, updateCategory, deleteCategory }) => {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [currentExpenseItem, setCurrentExpenseItem] = useState(null);
     const [isCategoryMenuVisible, setCategoryIsMenuVisible] = useState(false);
@@ -81,13 +81,14 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
         alignItems: 'center',
         justifyContent: 'center',
     }));
-    const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    const StyledInputBase = styled(InputBase)(({ theme, search }) => ({
         color: 'inherit',
         '& .MuiInputBase-input': {
             padding: theme.spacing(1, 1, 1, 0),
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             transition: theme.transitions.create('width'),
             width: '100%',
+            value: { search },
             [theme.breakpoints.up('md')]: {
                 width: '20ch',
             },
@@ -148,6 +149,10 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
                                         <StyledInputBase
                                             placeholder="Search…"
                                             inputProps={{ 'aria-label': 'search' }}
+                                            value={search}
+                                            onChange={(e) => {
+                                                setSearch(e.target.value)
+                                            }}
                                         />
                                     </Search>
                                 </Box>
@@ -155,7 +160,14 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
                             <Box>
                                 <Box mt={"15px"} sx={expanseOuter}>
                                     {
-                                        expanseData && expanseData.length == 0 && <>
+                                        expanseLoading && <>
+                                            <Skeleton variant="rectangular" height={"60px"} width={"100%"} />
+                                            <Skeleton sx={{ marginTop: "8px" }} variant="rectangular" height={"60px"} width={"100%"} />
+                                            <Skeleton sx={{ marginTop: "8px" }} variant="rectangular" height={"60px"} width={"100%"} />
+                                        </>
+                                    }
+                                    {
+                                        !expanseLoading && expanseData && expanseData.total == 0 && <>
                                             <Box sx={{ ...center, flexDirection: "column", gap: "30px", marginTop: "20px" }}>
                                                 <DashboardPlaceholder />
                                                 <Box sx={{ width: "270px", ...center, flexDirection: "column", gap: "20px" }}>
@@ -169,8 +181,9 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
                                             </Box>
                                         </>
                                     }
-                                    {expanseData && expanseData.length > 0 &&
-                                        expanseData.map((row, index) => (
+                                    {
+                                        !expanseLoading && expanseData && expanseData.total > 0 && expanseData.result &&
+                                        expanseData.result.map((row, index) => (
                                             <Box sx={expanseInner}
                                                 onMouseEnter={() => {
                                                     setIsMenuVisible(true);
@@ -178,22 +191,22 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
                                                 }}
                                                 onMouseLeave={() => setIsMenuVisible(false)}>
                                                 <Box>
-                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                        <FolderIcon />
+                                                    <Avatar sx={{ bgcolor: "light.main", width: "50px", height: "50px" }}>
+                                                        {row && row.category && row.category.icon}
                                                     </Avatar>
                                                 </Box>
                                                 <Box sx={{
                                                     display: "flex", justifyContent: "space-between", flex: "1 0 0"
                                                 }}>
                                                     <Box>
-                                                        <Typography variant="h4" color={"white"} sx={{ marginTop: "6px" }}>Food</Typography>
+                                                        <Typography variant="h4" color={"white"} sx={{ marginTop: "6px" }}>{row && row.description}</Typography>
                                                     </Box>
                                                     <Box>
                                                         <Typography variant="p" color={"Gray"}>Date</Typography>
-                                                        <Typography variant="h4" color={"white"}>Oct 1</Typography>
+                                                        <Typography variant="h4" color={"white"}>{new Date(row.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</Typography>
                                                     </Box>
                                                     <Box>
-                                                        <Typography variant="h3">₹200.00</Typography>
+                                                        <Typography variant="h3">₹{row && row.amount}</Typography>
                                                     </Box>
                                                     <Box sx={{ marginTop: "8px" }}>
                                                         {/* {!isMenuVisible && <MenuIcon />} */}
@@ -218,11 +231,11 @@ const TransactionUI = ({ loading, date, setDate, expanseData, filters, setFilter
 
                                     </Grid>
                                     <Grid item xs={7}>
-                                        {expanseData && expanseData.length > 0 && (
+                                        {expanseData && expanseData.total > 0 && (
                                             <TablePagination
                                                 rowsPerPageOptions={[10, 25, 100]}
                                                 component="div"
-                                                count={expanseData.length}
+                                                count={expanseData.total}
                                                 rowsPerPage={parseInt(filters.pageSize)}
                                                 page={parseInt(filters.pageNo) - 1}
                                                 onPageChange={(e, pageNo) => {

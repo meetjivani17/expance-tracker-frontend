@@ -32,8 +32,9 @@ const UpdateCategoryController = ({ row }) => {
 
     const updateCategory = async (formValues, _id) => {
         setLoading(true);
+        console.log({ ...formValues, id: _id })
         dispatch(callApiAction(
-            async () => await updateCategoryFieldApi({ ...formValues, id: _id }),
+            async () => await updateCategoryFieldApi({ ...formValues }, { id: _id }),
             (response) => {
                 dispatch(closeModal());
                 setLoading(false)

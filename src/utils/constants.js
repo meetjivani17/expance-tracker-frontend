@@ -8,6 +8,16 @@ export const GRAPHICAL_VIEW_TYPE = {
   FILTER_BY_CATEGORY: "FILTER_BY_CATEGORY",
 };
 
+export const WEEK_DAYS = {
+  1:"Sunday",
+  2:"Monday",
+  3:"Tuesday",
+  4:"wednesday",
+  5:"Thrusday",
+  6:"Friday",
+  7:"Saturday"
+};
+
 export const GRAPHICAL_VIEW_DURATION = {
   MONTHLY_DATA: "MONTHLY_DATA",
   MONTH_DAYS_DATA: "MONTH_DAYS_DATA",

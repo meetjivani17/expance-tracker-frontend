@@ -19,11 +19,12 @@ export const addTransactionApi = async (data) => {
   return callResponse;
 };
 
-export const getTrasactionApi = async () => {
+export const getTrasactionApi = async (params) => {
   const callResponse = await axios({
     url: endpoints.transaction,
     method: "get",
-    headers: getHeaders()
+    headers: getHeaders(),
+    params
   })
     .then((response) => response.data)
     .catch((err) => ({

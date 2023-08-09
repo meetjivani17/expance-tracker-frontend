@@ -14,7 +14,7 @@ const AddExpanceController = () => {
         amount: null,
         category_name: '',
         category_id: "",
-        icon: ""
+        category_icon: ""
     })
     const addExpance = (formValues) => {
         console.log(formValues);

@@ -1,15 +1,15 @@
 import React from "react";
-import { Box, Collapse, IconButton, useTheme, Paper, useMediaQuery, Typography, Button, ButtonBase, styled, Grid, Avatar, InputBase, NativeSelect, MenuItem } from "@mui/material"
+import { Box, Collapse, IconButton, useTheme, Paper, useMediaQuery, Typography, Button, ButtonBase, styled, Grid, Avatar, InputBase, NativeSelect, MenuItem, Skeleton, Select } from "@mui/material"
 import FolderIcon from '@mui/icons-material/Folder';
 import { MenuIcon } from "./../../components/layouts/common/Logo"
 import { center } from "../../assets/css/theme/common";
-import Select from '@mui/material/Select';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { PieChart, Pie, Cell, Legend } from "recharts";
 import { useNavigate } from "react-router-dom";
 import { DashboardPlaceholder, CryptoPlaceholder, GraphPlaceholder } from "./../../components/layouts/common/Logo";
+import { GRAPHICAL_VIEW_DURATION } from "../../utils/constants";
 
-const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
+const DashboardUI = ({ age, handleChange, GraphData, PieChartData, expanseData, loading, graphDuraction, setGraphDuraction, weekGraphDayData, monthGraphDayData }) => {
     const navigate = useNavigate();
     const CustomLegend = ({ payload }) => {
         return (
@@ -46,19 +46,6 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
             fontSize: 16,
             padding: '10px 26px 10px 12px',
             transition: theme.transitions.create(['border-color', 'box-shadow']),
-            // Use the system font instead of the default Roboto font.
-            fontFamily: [
-                '-apple-system',
-                'BlinkMacSystemFont',
-                '"Segoe UI"',
-                'Roboto',
-                '"Helvetica Neue"',
-                'Arial',
-                'sans-serif',
-                '"Apple Color Emoji"',
-                '"Segoe UI Emoji"',
-                '"Segoe UI Symbol"',
-            ].join(','),
             '&:focus': {
                 borderRadius: 4,
                 borderColor: "0.5px solid #64927C",
@@ -124,91 +111,48 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
                                         navigate("/transactions")
                                     }} />
                                 </Box>
-                                {
-                                    GraphData.length == 0 && <>
-                                        <Box sx={{ ...center, height: "30vh", marginTop: "15px" }}>
-                                            <DashboardPlaceholder />
-                                        </Box>
-                                    </>
-                                }
-                                {
-                                    GraphData.length > 0 && <>
-                                        <Box mt={"15px"} sx={expanseOuter}>
-                                            <Box sx={expanseInner}>
-                                                <Box>
-                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                        <FolderIcon />
-                                                    </Avatar>
-                                                </Box>
-                                                <Box sx={{
-                                                    display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
-                                                }}>
-                                                    <Box>
-                                                        <Typography variant="h4" color={"white"}>Food</Typography>
-                                                        <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
-                                                    </Box>
-                                                    <Box>
-                                                        <Typography variant="h3">₹200.00</Typography>
-                                                    </Box>
-                                                </Box>
+                                <Box mt={"15px"} sx={expanseOuter}>
+                                    {
+                                        loading && <>
+                                            <Box>
+                                                <Skeleton variant="rectangular" height={"60px"} width={"100%"} />
+                                                <Skeleton sx={{ marginTop: "8px" }} variant="rectangular" height={"60px"} width={"100%"} />
+                                                <Skeleton sx={{ marginTop: "8px" }} variant="rectangular" height={"60px"} width={"100%"} />
                                             </Box>
-                                            <Box sx={expanseInner}>
-                                                <Box>
-                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                        <FolderIcon />
-                                                    </Avatar>
-                                                </Box>
-                                                <Box sx={{
-                                                    display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
-                                                }}>
-                                                    <Box>
-                                                        <Typography variant="h4" color={"white"}>Food</Typography>
-                                                        <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
-                                                    </Box>
-                                                    <Box>
-                                                        <Typography variant="h3">₹200.00</Typography>
-                                                    </Box>
-                                                </Box>
+                                        </>
+                                    }
+                                    {
+                                        !loading && expanseData && expanseData.total == 0 && <>
+                                            <Box sx={{ ...center, height: "30vh", marginTop: "15px" }}>
+                                                <DashboardPlaceholder />
                                             </Box>
-                                            <Box sx={expanseInner}>
-                                                <Box>
-                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                        <FolderIcon />
-                                                    </Avatar>
-                                                </Box>
-                                                <Box sx={{
-                                                    display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
-                                                }}>
+                                        </>
+                                    }
+                                    {
+                                        !loading && expanseData && expanseData.total > 0 && expanseData.result && expanseData.result.map((row, index) => (
+                                            <>
+                                                <Box sx={expanseInner}>
                                                     <Box>
-                                                        <Typography variant="h4" color={"white"}>Food</Typography>
-                                                        <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
+                                                        <Avatar sx={{ bgcolor: "light.main", width: "50px", height: "50px" }}>
+                                                            {row && row.category && row.category.icon}
+                                                        </Avatar>
                                                     </Box>
-                                                    <Box>
-                                                        <Typography variant="h3">₹200.00</Typography>
-                                                    </Box>
-                                                </Box>
-                                            </Box>
-                                            <Box sx={expanseInner}>
-                                                <Box>
-                                                    <Avatar sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}>
-                                                        <FolderIcon />
-                                                    </Avatar>
-                                                </Box>
-                                                <Box sx={{
-                                                    display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
-                                                }}>
-                                                    <Box>
-                                                        <Typography variant="h4" color={"white"}>Food</Typography>
-                                                        <Typography variant="p" color={"Gray"}>Oct 1 01:10PM</Typography>
-                                                    </Box>
-                                                    <Box>
-                                                        <Typography variant="h3">₹200.00</Typography>
+                                                    <Box sx={{
+                                                        display: "flex", justifyContent: "space-between", alignItems: "flex-start", flex: "1 0 0"
+                                                    }}>
+                                                        <Box>
+                                                            <Typography variant="h4" color={"white"}>{row && row.description}</Typography>
+                                                            <Typography variant="p" color={"Gray"}>{new Date(row.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</Typography>
+                                                        </Box>
+                                                        <Box>
+                                                            <Typography variant="h3">₹{row && row.amount}</Typography>
+                                                        </Box>
                                                     </Box>
                                                 </Box>
-                                            </Box>
-                                        </Box>
-                                    </>
-                                }
+                                            </>
+                                        ))
+                                    }
+                                </Box>
                             </Box>
                         </Grid>
                         <Grid item xs={6}>
@@ -289,8 +233,11 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
                             <Select
                                 labelId="demo-customized-select-label"
                                 id="demo-customized-select"
-                                value={age}
-                                onChange={handleChange}
+                                value={graphDuraction}
+                                onChange={(e) => {
+                                    setGraphDuraction(e.target.value)
+                                    console.log(graphDuraction)
+                                }}
                                 input={<BootstrapInput />}
                                 style={{ background: 'transparent', marginTop: "-7px" }}
                                 MenuProps={{
@@ -302,9 +249,9 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
                                     },
                                 }}
                             >
-                                <MenuItem value={10}>this week</MenuItem>
-                                <MenuItem value={20}>this month</MenuItem>
-                                <MenuItem value={30}>this year</MenuItem>
+                                <MenuItem value="WEEK_DAYS_DATA" defaultChecked>this week</MenuItem>
+                                <MenuItem value="MONTH_DAYS_DATA">this month</MenuItem>
+                                <MenuItem value="MONTHLY_DATA">this year</MenuItem>
                             </Select>
                         </Box>
                         {
@@ -326,24 +273,28 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData }) => {
                             GraphData.length > 0 && <>
                                 <Box mt={"15px"} sx={{ width: "100%", height: "100%" }}>
                                     <ResponsiveContainer width="100%" height={250}>
-                                        <AreaChart data={GraphData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                            <defs>
-                                                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                                                    <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-                                                    <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-                                                </linearGradient>
-                                            </defs>
-                                            <XAxis dataKey="name" />
-                                            <YAxis />
-                                            <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
-                                        </AreaChart>
+                                        {
+                                            graphDuraction == "WEEK_DAYS_DATA" &&
+
+                                            <AreaChart data={weekGraphDayData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                                <defs>
+                                                    <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                                                        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                                                    </linearGradient>
+                                                </defs>
+                                                <XAxis dataKey="day" />
+                                                <YAxis />
+                                                <Area type="monotone" dataKey="amount" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+                                            </AreaChart>
+                                        }
                                     </ResponsiveContainer>
                                 </Box>
                             </>
                         }
                     </Box>
                 </Box>
-            </Box>
+            </Box >
         </>
     )
 }

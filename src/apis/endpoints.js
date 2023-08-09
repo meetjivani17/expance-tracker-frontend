@@ -8,7 +8,7 @@ switch (mode) {
     domain = process.env.REACT_APP_PRODUCTION_URL;
     break;
   case "local":
-    domain = "http://localhost:8000/expanse-tracker";
+    domain = "http://localhost:8000/expense-tracker/";
     break;
   case "development":
     domain = process.env.REACT_APP_DEVELOPMENT_URL;
