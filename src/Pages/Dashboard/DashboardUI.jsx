@@ -274,7 +274,7 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData, expanseData, 
                                 <Box mt={"15px"} sx={{ width: "100%", height: "100%" }}>
                                     <ResponsiveContainer width="100%" height={250}>
                                         {
-                                            graphDuraction == "WEEK_DAYS_DATA" &&
+                                            graphDuraction == GRAPHICAL_VIEW_DURATION.WEEK_DAYS_DATA &&
 
                                             <AreaChart data={weekGraphDayData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                                 <defs>

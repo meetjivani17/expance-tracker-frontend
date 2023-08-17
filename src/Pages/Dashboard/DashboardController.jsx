@@ -11,7 +11,7 @@ const DashboardController = () => {
         setAge(e.target.value);
     }
     const [loading, setLoading] = useState(false);
-    const [graphDuraction, setGraphDuraction] = useState("WEEK_DAYS_DATA")
+    const [graphDuraction, setGraphDuraction] = useState(GRAPHICAL_VIEW_DURATION.WEEK_DAYS_DATA)
     const [expanseData, setExpanseData] = useState();
     const [weekGraphDayData, setWeekGraphDayData] = useState([]);
     const [monthGraphDayData, setMonthGraphDayData] = useState([]);
