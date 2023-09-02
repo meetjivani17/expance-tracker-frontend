@@ -36,12 +36,13 @@ export const getTrasactionApi = async (params) => {
   return callResponse;
 };
 
-export const updateTrasactionFieldApi = async (data) => {
+export const updateTrasactionFieldApi = async (data,params) => {
   const callResponse = await axios({
     url: endpoints.transaction,
     method: "PATCH",
     headers: getHeaders(),
     data,
+    params
   })
     .then((response) => response.data)
     .catch((err) => ({

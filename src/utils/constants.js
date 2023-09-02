@@ -18,6 +18,21 @@ export const WEEK_DAYS = {
   7:"Saturday"
 };
 
+export const YEAR_MONTHS = {
+  1:"January",
+  2:"February",
+  3:"March",
+  4:"April",
+  5:"May",
+  6:"June",
+  7:"July",
+  8:"August",
+  9:"September",
+  10:"October",
+  11:"November",
+  12:"December",
+};
+
 export const GRAPHICAL_VIEW_DURATION = {
   MONTHLY_DATA: "MONTHLY_DATA",
   MONTH_DAYS_DATA: "MONTH_DAYS_DATA",

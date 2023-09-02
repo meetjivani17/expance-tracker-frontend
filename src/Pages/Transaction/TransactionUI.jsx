@@ -9,7 +9,7 @@ import { openModal, closeModal } from "../../store/actions/modalAction";
 import { center } from "../../assets/css/theme/common";
 import { SubscriptionsPlaceholder, DashboardPlaceholder } from "./../../components/layouts/common/Logo";
 
-const TransactionUI = ({ loading, expanseLoading, date, setDate, search, setSearch, expanseData, filters, setFilters, addNewExpanceModal, updateExpance, AddCategory, categorydata, updateCategory, deleteCategory }) => {
+const TransactionUI = ({ loading, expanseLoading, date, setDate, search, setSearch, expanseData, filters, setFilters, addNewExpanceModal, updateExpance, AddCategory, categorydata, updateCategory, deleteCategory, deleteExpance }) => {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [currentExpenseItem, setCurrentExpenseItem] = useState(null);
     const [isCategoryMenuVisible, setCategoryIsMenuVisible] = useState(false);
@@ -119,6 +119,16 @@ const TransactionUI = ({ loading, expanseLoading, date, setDate, search, setSear
             zIndex: 99,
         }
     })
+    const expanseInnerForRecent = (theme) => ({
+        marginTop: "20px",
+        transition: "all 0.3s ease",
+        "&:hover": {
+            boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.2)",
+            // transform: "scale(1.1)",
+            position: "relative",
+            zIndex: 99,
+        }
+    })
     return (
         <>
             <Box>
@@ -184,45 +194,43 @@ const TransactionUI = ({ loading, expanseLoading, date, setDate, search, setSear
                                     {
                                         !expanseLoading && expanseData && expanseData.total > 0 && expanseData.result &&
                                         expanseData.result.map((row, index) => (
-                                            <Box sx={expanseInner}
+                                            <Grid container spacing={"4px"} sx={expanseInnerForRecent}
                                                 onMouseEnter={() => {
                                                     setIsMenuVisible(true);
                                                     setCurrentExpenseItem(index);
                                                 }}
                                                 onMouseLeave={() => setIsMenuVisible(false)}>
-                                                <Box>
+                                                <Grid item xs={2}>
                                                     <Avatar sx={{ bgcolor: "light.main", width: "50px", height: "50px" }}>
                                                         {row && row.category && row.category.icon}
                                                     </Avatar>
-                                                </Box>
-                                                <Box sx={{
-                                                    display: "flex", justifyContent: "space-between", flex: "1 0 0"
-                                                }}>
-                                                    <Box>
-                                                        <Typography variant="h4" color={"white"} sx={{ marginTop: "6px" }}>{row && row.description}</Typography>
-                                                    </Box>
-                                                    <Box>
-                                                        <Typography variant="p" color={"Gray"}>Date</Typography>
-                                                        <Typography variant="h4" color={"white"}>{new Date(row.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</Typography>
-                                                    </Box>
-                                                    <Box>
-                                                        <Typography variant="h3">₹{row && row.amount}</Typography>
-                                                    </Box>
-                                                    <Box sx={{ marginTop: "8px" }}>
-                                                        {/* {!isMenuVisible && <MenuIcon />} */}
-                                                        {isMenuVisible && currentExpenseItem == index && (
-                                                            <Box sx={{ ...center, gap: "3px" }}>
-                                                                <ButtonBase onClick={updateExpance}>
-                                                                    <Update />
-                                                                </ButtonBase>
-                                                                <ButtonBase>
-                                                                    <Delete />
-                                                                </ButtonBase>
-                                                            </Box>
-                                                        )}
-                                                    </Box>
-                                                </Box>
-                                            </Box>
+                                                </Grid>
+                                                <Grid item xs={3}>
+                                                    <Typography variant="h4" color={"white"} sx={{ marginTop: "6px" }}>{row && row.description}</Typography>
+                                                </Grid>
+                                                <Grid item xs={4}>
+                                                    <Typography variant="p" color={"Gray"}>Date</Typography>
+                                                    <Typography variant="h4" color={"white"}>{new Date(row.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</Typography>
+                                                </Grid>
+                                                <Grid item xs={2}>
+                                                    <Typography variant="h3">₹{row && row.amount}</Typography>
+                                                </Grid>
+                                                <Grid sx={{ marginTop: "8px" }} item xs={1}>
+                                                    {/* {!isMenuVisible && <MenuIcon />} */}
+                                                    {isMenuVisible && currentExpenseItem == index && (
+                                                        <Box sx={{ ...center, gap: "3px" }}>
+                                                            <ButtonBase onClick={() => { updateExpance(row) }}>
+                                                                <Update />
+                                                            </ButtonBase>
+                                                            <ButtonBase onClick={() => {
+                                                                deleteExpance(row._id)
+                                                            }}>
+                                                                <Delete />
+                                                            </ButtonBase>
+                                                        </Box>
+                                                    )}
+                                                </Grid>
+                                            </Grid>
                                         ))
                                     }
                                 </Box>
@@ -231,7 +239,7 @@ const TransactionUI = ({ loading, expanseLoading, date, setDate, search, setSear
 
                                     </Grid>
                                     <Grid item xs={7}>
-                                        {expanseData && expanseData.total > 0 && (
+                                        {expanseData && expanseData.total > 0 && expanseData.result && (
                                             <TablePagination
                                                 rowsPerPageOptions={[10, 25, 100]}
                                                 component="div"

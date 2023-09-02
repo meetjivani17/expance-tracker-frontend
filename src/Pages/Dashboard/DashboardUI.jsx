@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { DashboardPlaceholder, CryptoPlaceholder, GraphPlaceholder } from "./../../components/layouts/common/Logo";
 import { GRAPHICAL_VIEW_DURATION } from "../../utils/constants";
 
-const DashboardUI = ({ age, handleChange, GraphData, PieChartData, expanseData, loading, graphDuraction, setGraphDuraction, weekGraphDayData, monthGraphDayData }) => {
+const DashboardUI = ({ GraphData, PieChartData, expanseData, loading, graphDuraction, setGraphDuraction, weekGraphDayData, monthGraphDayData, yearGraphDayData, pieChartDuraction, setPieChartDuraction, yearChartData, monthChartData, weekChartData }) => {
     const navigate = useNavigate();
     const CustomLegend = ({ payload }) => {
         return (
@@ -163,22 +163,24 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData, expanseData, 
                                 <Select
                                     labelId="demo-customized-select-label"
                                     id="demo-customized-select"
-                                    value={age}
-                                    onChange={handleChange}
+                                    value={pieChartDuraction}
+                                    onChange={(e) => {
+                                        setPieChartDuraction(e.target.value)
+                                    }}
                                     input={<BootstrapInput />}
                                     style={{ background: 'transparent', marginTop: "-7px" }}
                                     MenuProps={{
                                         PaperProps: {
                                             style: {
-                                                background: "#1B191B",
-                                                color: "white",
+                                                background: '#1B191B',
+                                                color: "white"
                                             },
                                         },
                                     }}
                                 >
-                                    <MenuItem value={10}>this week</MenuItem>
-                                    <MenuItem value={20}>this month</MenuItem>
-                                    <MenuItem value={30}>this year</MenuItem>
+                                    <MenuItem value="WEEK_DAYS_DATA" defaultChecked>this week</MenuItem>
+                                    <MenuItem value="MONTH_DAYS_DATA">this month</MenuItem>
+                                    <MenuItem value="MONTHLY_DATA">this year</MenuItem>
                                 </Select>
                             </Box>
                             <Box mt={"15px"}>
@@ -192,31 +194,84 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData, expanseData, 
                                 {
                                     PieChartData.length > 0 && <>
                                         <Box sx={expanseOuter}>
-                                            <PieChart width={400} height={200}>
-                                                <Pie
-                                                    data={PieChartData}
-                                                    cx={125}
-                                                    cy={100}
-                                                    innerRadius={50}
-                                                    outerRadius={90}
-                                                    fill="#8884d8"
-                                                    paddingAngle={1}
-                                                    dataKey="value"
-                                                    cornerRadius={5}
-                                                    style={{ strokeWidth: "0" }}
-                                                >
-                                                    {PieChartData.map((entry, index) => (
-                                                        <Cell key={index} fill={entry.fill} />
-                                                    ))}
-                                                </Pie>
-                                                {/* <Legend verticalAlign="middle" align="right" layout="vertical" /> */}
-                                                <Legend
-                                                    content={<CustomLegend />}
-                                                    verticalAlign="middle"
-                                                    align="right"
-                                                    layout="horizontal"
-                                                />
-                                            </PieChart>
+                                            {pieChartDuraction == GRAPHICAL_VIEW_DURATION.WEEK_DAYS_DATA &&
+                                                <PieChart width={400} height={200}>
+                                                    <Pie
+                                                        data={weekChartData}
+                                                        cx={125}
+                                                        cy={100}
+                                                        innerRadius={50}
+                                                        outerRadius={90}
+                                                        fill="#8884d8"
+                                                        paddingAngle={1}
+                                                        dataKey="value"
+                                                        cornerRadius={5}
+                                                        style={{ strokeWidth: "0" }}
+                                                    >
+                                                        {weekChartData.map((entry, index) => (
+                                                            <Cell key={index} fill={entry.fill} />
+                                                        ))}
+                                                    </Pie>
+                                                    <Legend
+                                                        content={<CustomLegend />}
+                                                        verticalAlign="middle"
+                                                        align="right"
+                                                        layout="horizontal"
+                                                    />
+                                                </PieChart>
+                                            }
+                                            {pieChartDuraction == GRAPHICAL_VIEW_DURATION.MONTH_DAYS_DATA &&
+                                                <PieChart width={400} height={200}>
+                                                    <Pie
+                                                        data={monthChartData}
+                                                        cx={125}
+                                                        cy={100}
+                                                        innerRadius={50}
+                                                        outerRadius={90}
+                                                        fill="#8884d8"
+                                                        paddingAngle={1}
+                                                        dataKey="value"
+                                                        cornerRadius={5}
+                                                        style={{ strokeWidth: "0" }}
+                                                    >
+                                                        {monthChartData.map((entry, index) => (
+                                                            <Cell key={index} fill={entry.fill} />
+                                                        ))}
+                                                    </Pie>
+                                                    <Legend
+                                                        content={<CustomLegend />}
+                                                        verticalAlign="middle"
+                                                        align="right"
+                                                        layout="horizontal"
+                                                    />
+                                                </PieChart>
+                                            }
+                                            {pieChartDuraction == GRAPHICAL_VIEW_DURATION.MONTHLY_DATA &&
+                                                <PieChart width={400} height={200}>
+                                                    <Pie
+                                                        data={yearChartData}
+                                                        cx={125}
+                                                        cy={100}
+                                                        innerRadius={50}
+                                                        outerRadius={90}
+                                                        fill="#8884d8"
+                                                        paddingAngle={1}
+                                                        dataKey="value"
+                                                        cornerRadius={5}
+                                                        style={{ strokeWidth: "0" }}
+                                                    >
+                                                        {yearChartData.map((entry, index) => (
+                                                            <Cell key={index} fill={entry.fill} />
+                                                        ))}
+                                                    </Pie>
+                                                    <Legend
+                                                        content={<CustomLegend />}
+                                                        verticalAlign="middle"
+                                                        align="right"
+                                                        layout="horizontal"
+                                                    />
+                                                </PieChart>
+                                            }
                                         </Box>
                                     </>
                                 }
@@ -272,10 +327,9 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData, expanseData, 
                         {
                             GraphData.length > 0 && <>
                                 <Box mt={"15px"} sx={{ width: "100%", height: "100%" }}>
-                                    <ResponsiveContainer width="100%" height={250}>
-                                        {
-                                            graphDuraction == GRAPHICAL_VIEW_DURATION.WEEK_DAYS_DATA &&
-
+                                    {
+                                        graphDuraction == GRAPHICAL_VIEW_DURATION.WEEK_DAYS_DATA &&
+                                        <ResponsiveContainer width="100%" height={250}>
                                             <AreaChart data={weekGraphDayData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                                 <defs>
                                                     <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
@@ -287,8 +341,40 @@ const DashboardUI = ({ age, handleChange, GraphData, PieChartData, expanseData, 
                                                 <YAxis />
                                                 <Area type="monotone" dataKey="amount" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
                                             </AreaChart>
-                                        }
-                                    </ResponsiveContainer>
+                                        </ResponsiveContainer>
+                                    }
+                                    {
+                                        graphDuraction == GRAPHICAL_VIEW_DURATION.MONTH_DAYS_DATA &&
+                                        <ResponsiveContainer width="100%" height={250}>
+                                            <AreaChart data={monthGraphDayData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                                <defs>
+                                                    <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                                                        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                                                    </linearGradient>
+                                                </defs>
+                                                <XAxis dataKey="day" />
+                                                <YAxis />
+                                                <Area type="monotone" dataKey="amount" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+                                            </AreaChart>
+                                        </ResponsiveContainer>
+                                    }
+                                    {
+                                        graphDuraction == GRAPHICAL_VIEW_DURATION.MONTHLY_DATA &&
+                                        <ResponsiveContainer width="100%" height={250}>
+                                            <AreaChart data={yearGraphDayData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                                <defs>
+                                                    <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                                                        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                                                    </linearGradient>
+                                                </defs>
+                                                <XAxis dataKey="month" />
+                                                <YAxis />
+                                                <Area type="monotone" dataKey="amount" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+                                            </AreaChart>
+                                        </ResponsiveContainer>
+                                    }
                                 </Box>
                             </>
                         }

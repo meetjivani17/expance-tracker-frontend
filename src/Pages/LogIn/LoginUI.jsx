@@ -57,13 +57,16 @@ const LoginUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                                 inputProps={{
                                     sx: {
                                         color: "text.white"
+                                    },
+                                    label: {
+                                        color: "text.white"
                                     }
                                 }}
                                 disabled={loading}
                                 type="text"
                                 label="Email*"
                                 value={formValues.email}
-                                color="light"
+                                color="text"
                                 onChange={(e) =>
                                     setFormValues({
                                         ...formValues,
@@ -98,7 +101,7 @@ const LoginUI = ({ loading, formValues, setFormValues, onSubmit }) => {
                     <Login loading={loading} onClick={onSubmit}>
                         {
                             loading && <>
-                                <CircularProgress sx={{height:"24px"}}/>
+                                <CircularProgress sx={{ height: "24px" }} />
                             </>
                         }
                         {

@@ -8,8 +8,7 @@ import AddCategoryController from "./AddCategory/AddCategotyController";
 import { callApiAction } from "../../store/actions/commonAction";
 import { getCategoryApi, deleteCategoryApi } from "../../apis/category.api";
 import UpdateCategoryController from "./UpdateCategory/UpdateCategoryController";
-import DeleteConfirmation from "../../components/layouts/common/DeleteConfirmation";
-import { getTrasactionApi } from "../../apis/trasaction.api";
+import { getTrasactionApi, deleteTransactionApi } from "../../apis/trasaction.api";
 import { LIST_VIEW_TIME, TRANSACTION_FETCH_TYPE } from "../../utils/constants";
 
 const TransactionController = () => {
@@ -37,15 +36,6 @@ const TransactionController = () => {
             )
         );
     }
-    const updateExpance = () => {
-        dispatch(
-            openModal({
-                title: "Update Expance",
-                component: <UpdateExpanceController />,
-                size: "sm"
-            })
-        )
-    }
     const fetchList = () => {
         setLoading(true)
         dispatch(callApiAction(
@@ -68,7 +58,6 @@ const TransactionController = () => {
             async () => await getTrasactionApi({ transactionFetchType: TRANSACTION_FETCH_TYPE.LIST_VIEW, listViewTime: LIST_VIEW_TIME.ALL, ...filters, search }),
             (response) => {
                 setExpanseData(response)
-                console.log(response)
                 setExpanseLoading(false)
             },
             (err) => {
@@ -84,7 +73,6 @@ const TransactionController = () => {
             async () => await getTrasactionApi({ transactionFetchType: TRANSACTION_FETCH_TYPE.LIST_VIEW, listViewTime: LIST_VIEW_TIME.DATE, date: date, ...filters }),
             (response) => {
                 setExpanseData(response)
-                console.log(response)
                 setExpanseLoading(false)
             },
             (err) => {
@@ -93,11 +81,11 @@ const TransactionController = () => {
             }
         ))
     }
-    const AddCategory = () => {
+    const AddCategory = (row) => {
         dispatch(
             openModal({
                 title: "Add Category",
-                component: <AddCategoryController />,
+                component: <AddCategoryController row={row} />,
                 size: "sm"
             })
         )
@@ -112,27 +100,43 @@ const TransactionController = () => {
             })
         )
     }
+    const updateExpance = (row) => {
+        dispatch(
+            openModal({
+                title: "Update Expance",
+                component: <UpdateExpanceController row={row} />,
+                size: "sm"
+            })
+        )
+        fetchTransaction();
+    }
 
     const deleteCategory = (id) => {
         dispatch(callApiAction(
             async () => await deleteCategoryApi({ id: id }),
             (response) => {
                 setLoading(false)
-                window.location.reload(true);
+                // window.location.reload(true);
+                fetchList();
             },
             (err) => {
                 console.log(err)
                 setLoading(false)
             }
         ))
-        // setDeletId(id);
-        // dispatch(
-        //     openModal({
-        //         title: "Delete Expense",
-        //         component: <DeleteConfirmation setDeleteC={setDeleteC} />,
-        //         size: "sm"
-        //     })
-        // )
+    }
+    const deleteExpance = (id) => {
+        dispatch(callApiAction(
+            async () => await deleteTransactionApi({ id: id }),
+            (response) => {
+                setLoading(false)
+                fetchTransaction();
+            },
+            (err) => {
+                console.log(err)
+                setLoading(false)
+            }
+        ))
     }
     useEffect(() => {
         fetchList();
@@ -151,7 +155,7 @@ const TransactionController = () => {
 
     return (
         <>
-            <TransactionUI loading={loading} expanseLoading={expanseLoading} date={date} setDate={setDate} search={search} setSearch={setSearch} expanseData={expanseData} filters={filters} setFilters={setFilters} addNewExpanceModal={addNewExpanceModal} updateExpance={updateExpance} AddCategory={AddCategory} categorydata={categorydata} updateCategory={updateCategory} deleteCategory={deleteCategory} />
+            <TransactionUI loading={loading} expanseLoading={expanseLoading} date={date} setDate={setDate} search={search} setSearch={setSearch} expanseData={expanseData} filters={filters} setFilters={setFilters} addNewExpanceModal={addNewExpanceModal} updateExpance={updateExpance} AddCategory={AddCategory} categorydata={categorydata} updateCategory={updateCategory} deleteCategory={deleteCategory} deleteExpance={deleteExpance} />
         </>
     )
 }
