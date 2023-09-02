@@ -1,16 +1,19 @@
 {
   "files": {
-    "main.css": "/expance_traker_frontend/static/css/main.028490bb.css",
-    "main.js": "/expance_traker_frontend/static/js/main.66189951.js",
-    "static/js/787.fe55d599.chunk.js": "/expance_traker_frontend/static/js/787.fe55d599.chunk.js",
-    "static/media/Azonix.woff": "/expance_traker_frontend/static/media/Azonix.18058c96d53ad2f9f2a3.woff",
-    "index.html": "/expance_traker_frontend/index.html",
-    "main.028490bb.css.map": "/expance_traker_frontend/static/css/main.028490bb.css.map",
-    "main.66189951.js.map": "/expance_traker_frontend/static/js/main.66189951.js.map",
-    "787.fe55d599.chunk.js.map": "/expance_traker_frontend/static/js/787.fe55d599.chunk.js.map"
+    "main.css": "/static/css/main.4d5168f3.css",
+    "main.js": "/static/js/main.bcb04e9a.js",
+    "static/js/787.fe55d599.chunk.js": "/static/js/787.fe55d599.chunk.js",
+    "static/media/Crypto Placeholder.png": "/static/media/Crypto Placeholder.61c3686a0b9c4067c68e.png",
+    "static/media/Transaction Placeholder 1.png": "/static/media/Transaction Placeholder 1.0b67c92a07992ad94e63.png",
+    "static/media/Graph Placeholder.png": "/static/media/Graph Placeholder.17c9be2fe418bc709a28.png",
+    "static/media/Azonix.woff": "/static/media/Azonix.18058c96d53ad2f9f2a3.woff",
+    "index.html": "/index.html",
+    "main.4d5168f3.css.map": "/static/css/main.4d5168f3.css.map",
+    "main.bcb04e9a.js.map": "/static/js/main.bcb04e9a.js.map",
+    "787.fe55d599.chunk.js.map": "/static/js/787.fe55d599.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.028490bb.css",
-    "static/js/main.66189951.js"
+    "static/css/main.4d5168f3.css",
+    "static/js/main.bcb04e9a.js"
   ]
 }
