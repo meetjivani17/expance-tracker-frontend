@@ -5,7 +5,7 @@ import { callApiAction } from "../../../store/actions/commonAction";
 import { addTransactionApi } from "../../../apis/trasaction.api";
 import { closeModal } from "../../../store/actions/modalAction";
 
-const AddExpanceController = () => {
+const AddExpanceController = ({ fetchTransaction }) => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [formValues, setFormValues] = useState({
@@ -24,6 +24,7 @@ const AddExpanceController = () => {
             (response) => {
                 dispatch(closeModal());
                 setLoading(false)
+                fetchTransaction();
             },
             (err) => {
                 setFormValues({ ...formValues, err: err })

@@ -30,10 +30,9 @@ const TransactionController = () => {
         dispatch(
             openModal({
                 title: "Add New Expance",
-                component: <AddExpanceController />,
+                component: <AddExpanceController fetchTransaction={fetchTransaction} />,
                 size: "sm"
-            }
-            )
+            })
         );
     }
     const fetchList = () => {
@@ -85,7 +84,7 @@ const TransactionController = () => {
         dispatch(
             openModal({
                 title: "Add Category",
-                component: <AddCategoryController row={row} />,
+                component: <AddCategoryController fetchList={fetchList} />,
                 size: "sm"
             })
         )

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../../store/actions/modalAction";
 
-const AddCategoryController = () => {
+const AddCategoryController = ({ fetchList }) => {
     const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState({
         err: '',
@@ -37,7 +37,8 @@ const AddCategoryController = () => {
             async () => await addCategoryApi({ ...formValues, ...chosenEmoji }),
             (response) => {
                 dispatch(closeModal());
-                setLoading(false)
+                setLoading(false);
+                fetchList();
             },
             (err) => {
                 setFormValues({ ...formValues, err: err })
