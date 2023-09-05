@@ -29,7 +29,7 @@ const TransactionController = () => {
     const addNewExpanceModal = () => {
         dispatch(
             openModal({
-                title: "Add New Expance",
+                title: "Add New Expanse",
                 component: <AddExpanceController fetchTransaction={fetchTransaction} />,
                 size: "sm"
             })
@@ -52,7 +52,6 @@ const TransactionController = () => {
 
     const fetchTransaction = () => {
         setExpanseLoading(true)
-        console.log({ transactionFetchType: TRANSACTION_FETCH_TYPE.LIST_VIEW, listViewTime: LIST_VIEW_TIME.ALL, ...filters, ...search });
         dispatch(callApiAction(
             async () => await getTrasactionApi({ transactionFetchType: TRANSACTION_FETCH_TYPE.LIST_VIEW, listViewTime: LIST_VIEW_TIME.ALL, ...filters, search }),
             (response) => {
@@ -94,7 +93,7 @@ const TransactionController = () => {
         dispatch(
             openModal({
                 title: "Update Category",
-                component: <UpdateCategoryController row={row} />,
+                component: <UpdateCategoryController row={row} fetchList={fetchList}/>,
                 size: "sm"
             })
         )
@@ -102,7 +101,7 @@ const TransactionController = () => {
     const updateExpance = (row) => {
         dispatch(
             openModal({
-                title: "Update Expance",
+                title: "Update Expanse",
                 component: <UpdateExpanceController row={row} />,
                 size: "sm"
             })
@@ -143,7 +142,7 @@ const TransactionController = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             fetchTransaction();
-        }, 500)
+        }, 2000)
 
         return () => clearTimeout(timer)
 

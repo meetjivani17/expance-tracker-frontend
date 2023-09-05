@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../../store/actions/modalAction";
 
-const UpdateCategoryController = ({ row }) => {
+const UpdateCategoryController = ({ row ,fetchList}) => {
     const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState({
         err: '',
@@ -38,6 +38,7 @@ const UpdateCategoryController = ({ row }) => {
             (response) => {
                 dispatch(closeModal());
                 setLoading(false)
+                fetchList();
             },
             (err) => {
                 setFormValues({ ...formValues, err: err })
